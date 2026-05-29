@@ -18,8 +18,6 @@
 
 🔗 [Link público do circuito no Tinkercad](https://www.tinkercad.com/things/03MCpQksuJ4-smashing-bruticus)
 
-> Substitua o link acima pelo link público do seu projeto após publicar no Tinkercad.
-
 ---
 
 ## Guia de Operação
@@ -48,7 +46,6 @@ Para operar o braço, abra o **Monitor Serial** na Arduino IDE (ou no Tinkercad)
 ## Software de Modelagem 3D
 
 As peças foram modeladas no **OpenSCAD** (versão gratuita e open-source).
-Arquivo nativo: `modelos-3d/garra_espacial.scad`
 
 Download: https://openscad.org/downloads.html
 
