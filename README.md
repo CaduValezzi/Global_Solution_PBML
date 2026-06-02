@@ -50,6 +50,20 @@ As peças foram modeladas no **OpenSCAD** (versão gratuita e open-source).
 Download: https://openscad.org/downloads.html
 
 ---
+## Estrutura do Repositório
+
+```
+braco-robotico/
+├── src/
+│   └── braco_robotico.ino
+├── model/
+│   ├── garra_espacial.scad
+├── images/
+│   ├── circuito_simulado.png
+│   └── modelo_3d_render.png
+└── README.md
+```
+---
 
 ## Especificações Técnicas
 
@@ -64,20 +78,47 @@ Download: https://openscad.org/downloads.html
 | 13   | LED de status     | Pisca a cada comando recebido, aceso indica sistema pronto |
 | GND  | GND da protoboard | Referência comum entre Arduino e fonte                    |
 
-> Os servomotores são alimentados pela fonte de bancada (5V), **não** pelo pino 5V do Arduino, para evitar sobrecarga na placa.
 
 ---
-
-## Estrutura do Repositório
-
+## Montagem Física da Garra
+ 
+### Peças para imprimir
+ 
+São 3 peças separadas. Para exportar cada uma no OpenSCAD, comente as outras duas com `//` na seção CENA PRINCIPAL, pressione **F6** e vá em **File → Export → Export as STL**.
+ 
+| Peça | Tempo estimado | Material |
+|------|----------------|----------|
+| `base_montagem()` | ~1h | PLA |
+| `conjunto_garra()` | ~45min | PLA |
+| `elo_braco()` | ~30min | PLA |
+ 
+### Materiais necessários
+ 
+- 2x parafuso M3 x 10mm + porca M3 (pinos de articulação dos dedos)
+- 4x parafuso M3 x 8mm (fixação da base)
+- 1x servo SG90
+### Passo a passo
+ 
+**1. Encaixar o servo na base**
+O servo SG90 entra no alojamento retangular da `base_montagem` pelo topo. Deve encaixar firme com a folga de 0.5mm. Se apertar, lixe levemente as paredes do alojamento.
+ 
+**2. Prender o hub no eixo do servo**
+O `conjunto_garra` tem um hub com furo em formato D que encaixa diretamente no eixo do servo SG90. Empurra firme — o formato D trava a rotação sem precisar de parafuso.
+ 
+**3. Articular os dedos**
+Cada dedo tem um furo de 3.2mm na base. Passa um parafuso M3 por esse furo e aperta com a porca do outro lado. Não aperte demais — o dedo precisa girar levemente para abrir e fechar.
+ 
+**4. Fixar o elo**
+O `elo_braco` conecta a base ao segundo servo (ombro). Os furos nas extremidades encaixam com parafuso M3.
+ 
+### Lógica de funcionamento
+ 
 ```
-braco-robotico/
-├── src/
-│   └── braco_robotico.ino
-├── model/
-│   ├── garra_espacial.scad
-├── images/
-│   ├── circuito_simulado.png
-│   └── modelo_3d_render.png
-└── README.md
+Servo do ombro (pino 9)
+    └── gira o elo_braco → sobe e desce o braço inteiro
+ 
+Servo da garra (pino 10)
+    └── gira o conjunto_garra → abre e fecha os 3 dedos
 ```
+ 
+---
